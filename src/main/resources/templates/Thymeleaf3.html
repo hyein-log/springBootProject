@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>THYMELEAF 유틸리티 표현식</h1>
+<p th:text = "${now}"></p>
+<p th:text = "${salary}"></p>
+<p th:text = "${message}"></p>
+<p th:text = "${fruits}"></p>
+<p th:text = "|날짜포맷지정 ${#dates.format(now,'yyyy.MM.dd')}|"></p>
+<div th:with="aa=${#dates.format(now,'yyyy-MM-dd')}">
+<p>지역변수에 저장하여 읽기 = [[${aa}]]</p>
+</div>
+<p th:text="${#numbers.formatDecimal(salary,3,'COMMA',2,'POINT')}"></p>
+<div th:with="bb=${#numbers.formatDecimal(salary,3,'COMMA',2,'POINT')}">
+<p th:text = "|숫자포맷지정 ${bb}|">지역변수에 저장하여 읽기 = [[${bb}]]</p>
+</div>
+<p th:utext="${#strings.replace(message,'hi','<b>HI!</b>')}"></p> <!-- message값 중 두번째 값을 세번째 값으로 바꿔라 , 태그를 입히고 싶으면 utext 사용하면 됨-->
+<ul>
+<li th:each="list:${#strings.listSplit(message,' ')}">[[${list}]]</li>
+</ul>
+<ul>
+<li th:each="f:${fruits}">[[${f}]]</li>
+</ul>
+
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+</body>
+</html>

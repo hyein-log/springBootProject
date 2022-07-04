@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>야호</h1>
+<p th:text="|<h1>타임리프연습</h1>|">!!!!</p> <!-- text를 조합하기위해  수직바를 사용
+ -->
+<p th:text="${score}">점수</p>
+<p th:text="${myname}">myname</p>
+<p th:text="${mycar.model}">mycar</p> <!-- el문법과 동일하다고 보면 됨 -->
+<p th:text = "${'<h1>'+mycar+'</h1>'}"></p>
+<p th:utext = "${'<h1>'+mycar.model+'</h1>'}"></p> <!-- utext일때는 태그가 보이지 않고 해석됨 -->
+</body>
+</html>

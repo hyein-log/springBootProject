@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf2</title>
+<style type="text/css">
+.firstLine{background-color: orange;}
+.lastLine{background-color: silver;}
+.oddLine{background-color: pink;}
+.evenLine{background-color: skyblue;}
+</style>
+<script th:inline="javascript">
+var blist = [[${boardList}]]; //오류표시나옴 하지만 됨...jackson => JSON DATA로 옴
+console.log(blist);
+console.log(blist[0].title);
+blist.map(item=>{console.log(item)});
+</script>
+</head>
+<body>
+	<h1>타임리프 연습 -- boardList 가져오기</h1>
+	<p>[[${#response.characterEncoding}]]</p>
+	<p th:text="${@environment.getProperty('server.port')}"></p>
+	<p th:text="${@environment.getProperty('app.title')}"></p>
+	<p th:text="${session.user3}"></p>
+	<p th:text="${param.a}"></p>
+	<p>[[${#request.getParameter('b')}]]</p>
+	<p th:if="${#lists.isEmpty(boardList)}">값이 있다</p>
+	<p th:if="${not #lists.isEmpty(boardList)}">값이 없다</p>
+	<p th:text="${#numbers.formatDecimal(salary,3,'COMMA',2,'POINT')}"></p>
+	<!-- <div th:text = "${boardList}"></div> -->
+	<table th:with="loginUser1=${User1},loginUser2='작성자10' ">
+		<tr>
+			<td>순서(index)</td>
+			<td>순서(count)</td>
+			<td>first-last</td>
+			<td>짝수-홀수</td>
+			<td>board번호</td>
+			<td>제목</td>
+			<td>내용</td>
+			<td>작성자</td>
+			<td>작성일</td>
+			<td>수정일</td>
+			<td>댓글수</td>
+		</tr>
+
+		<tr th:each="board,status:${boardList}" 
+			th:class="${status.first?'firstLine':''}"
+			th:classappend="${status.last?'lastLine':''}"
+			>
+			<td th:text="${status.index}">순서(index)</td>
+			<td th:text="${status.count}">순서(count)</td>
+			<td th:text="|${status.first} -- ${status.last}|">first-last</td>
+			<td th:text="${status.odd+'--'+status.even}">짝수-홀수-first-last</td>
+			<td th:text="${board.bno}">${board.bno}</td>
+			<!-- 			<td>[[${board.bno}]]</td>  인라인방식 -> 대괄호 두개 안에 내용쓰면 값나옴-->
+			<td>[[${board.title}]]..[[${#strings.contains(board.title,"1")}]]</td>
+			<td>[[${board.content}]]</td>
+			<td>[[${board.writer}]]
+				<span th:if="${board.writer==loginUser1}">
+				<a href="">[[${board.writer}]]</a>
+				<button>수정</button>
+				</span>
+				<span th:unless="${board.writer==loginUser1}">
+				<a href="">[[${board.writer}]]</a>
+				<button>보기</button>
+				</span>
+			</td>
+			<td th:text="${#dates.format(board.regdate,'yyyy-MM-dd')}"></td>
+			<td th:text="${#dates.format(board.updatedate,'yyyy-MM-dd')}"></td>
+			<!-- date형의 값의 format설정 가능 -->
+			<!-- 			<td>[[${board.updatedate}]]</td> -->
+			<td>[[${board.replies.size()}]]</td>
+		</tr>
+	</table>
+</body>
+</html>
