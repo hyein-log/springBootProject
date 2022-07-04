@@ -10,7 +10,7 @@
 .evenLine{background-color: skyblue;}
 </style>
 <script th:inline="javascript">
-var blist = [[${boardList}]]; //오류표시나옴 하지만 됨...jackson => JSON DATA로 옴
+//var blist = [[${boardList}]]; //오류표시나옴 하지만 됨...jackson => JSON DATA로 옴
 console.log(blist);
 console.log(blist[0].title);
 blist.map(item=>{console.log(item)});

@@ -47,7 +47,11 @@ public class ThymeleafController {
 		model.addAttribute("salary", 1245678911.283F);
 		model.addAttribute("message", "hi my name is hyein");
 		model.addAttribute("fruits", Arrays.asList("사과","바나나","망고","멜론","수박"));
-		
 		return "Thymeleaf3";
+	}
+	
+	@GetMapping("/sample4")
+	public String test4(Model model) {
+		return "Thymeleaf4_inherit";
 	}
 }

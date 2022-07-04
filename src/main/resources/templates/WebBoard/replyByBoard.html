@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>replyByBoard</title>
+</head>
+<body>
+<h1 th:text="${param.bno}"></h1>
+<table>
+		<tr>
+			<td>순서</td>
+			<td>댓글번호</td>
+			<td>댓글내용</td>
+			<td>댓글작성자</td>
+			<td>작성일</td>
+			<td>수정일</td>
+		</tr>
+		
+		<tr th:each="board, rowstatus:${reply}">
+		<td th:text="${rowstatus.count}">순서</td>
+			<td th:text="${board.rno}">게시번호</td>
+			<td th:text="${board.replyText}">내용</td>
+			<td th:text="${board.replyer}">작성자</td>
+			<td th:text="${board.regdate}">작성일</td>
+			<td th:text="${board.updatedate}">수정일</td>
+		</tr>
+	</table>
+</body>
+</html>

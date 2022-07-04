@@ -5,6 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div th:insert="~{fragments/header::header1}"></div>
 <h1>THYMELEAF 유틸리티 표현식</h1>
 <p th:text = "${now}"></p>
 <p th:text = "${salary}"></p>
@@ -25,12 +26,15 @@
 <ul>
 <li th:each="f:${fruits}">[[${f}]]</li>
 </ul>
-
+<ul>
+<li><a th:href="@{http://localhost:9999/sample1}">링크1-> full작성</a></li>
+<li><a th:href="@{/sample1}">링크2-1 -> 절대경로</a></li>
+<li><a th:href="@{~/sample1}">링크2-2 -> context가 다른 경우 절대경로</a></li>
+<li><a th:href="@{sample2}">링크3-1 -> 상대경로</a></li>
+<li><a th:href="@{/sample2(a=100, b='summer')}">링크3-2 -> 절대경로. 파라메터 있다.</a></li>
+<li><a>링크4</a>
+</ul>
 <p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
+<div th:insert="~{fragments/footer::footer}"></div>
 </body>
 </html>
